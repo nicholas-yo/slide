@@ -1,24 +1,29 @@
-(async () => {
+(() => {
   "use strict";
 
   const previous = document.querySelector(".previous");
-  const picture = document.querySelector('picture')
+  const picture = document.querySelector("picture");
   const next = document.querySelector(".next");
   const body = document.querySelector("body");
+  const imgs = document.querySelectorAll("img");
 
   const images = new Object(null);
 
   images[Symbol.iterator] = function* () {
-    yield "https://c.wallhere.com/photos/68/47/1920x1080_px_clouds_flowers_Love_Plus_Ponytail_School_Uniform_Takane_Manaka-628997.jpg!d",
-      yield "https://www.pixel4k.com/wp-content/uploads/2018/11/anime-girl-flowers-roses-face-4k_1541975650.jpg";
-    yield "https://wallpaperforu.com/wp-content/uploads/2020/12/glitch-wallpaper-20120513313832.jpg";
+    yield "https://www.kolpaper.com/wp-content/uploads/2020/03/doom-wallpaper.jpg",
+      yield "https://images3.alphacoders.com/686/686773.jpg";
+    yield "https://hdqwalls.com/wallpapers/doom-eternal-artwork-yd.jpg";
   };
+
+  imgs.forEach((element, index) => {
+    element.src = [...images][index];
+  });
 
   body.style.cssText = `
     background-image: url(${[...images][1]})
   `;
 
-  const duration = 700;
+  const duration = 500;
   const amount = duration;
 
   const delay = () => new Promise((resolve) => setTimeout(resolve, amount));
