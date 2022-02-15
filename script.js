@@ -20,7 +20,7 @@
   });
 
   body.style.cssText = `
-    background-image: url(${[...images][1]})
+  background-image: url(${[...images][1]})
   `;
 
   const duration = 500;
@@ -41,7 +41,11 @@
     element.animate(keyframes, options);
   };
 
-  function previousImage() {
+  const insertAfter = (newNode, referenceNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  };
+
+  const previousImage = () => {
     const imgs = document.querySelectorAll("img");
 
     previous.removeEventListener("click", previousImage, false);
@@ -55,9 +59,9 @@
     picture.insertBefore(imgs[imgs.length - 1], imgs[0]);
 
     delay().then(() => previous.addEventListener("click", previousImage));
-  }
+  };
 
-  function nextImage() {
+  const nextImage = () => {
     const imgs = document.querySelectorAll("img");
 
     next.removeEventListener("click", nextImage, false);
@@ -71,12 +75,8 @@
     insertAfter(imgs[0], imgs[imgs.length - 1]);
 
     delay().then(() => next.addEventListener("click", nextImage));
-  }
+  };
 
   previous.addEventListener("click", previousImage);
   next.addEventListener("click", nextImage);
-
-  const insertAfter = (newNode, referenceNode) => {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  };
 })();
